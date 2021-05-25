@@ -25,4 +25,25 @@ class CreateUserTest extends FunctionalTests {
                .when()
                .post(USER_API);
     }
+
+    @Test
+    void createUserWithAlreadyExistingEmailReturnsConflictStatus() {
+        JSONObject jsonObj = new JSONObject().put("email", "tracy2@domain.com");
+        int statusCode = HttpStatus.SC_CREATED;
+        for (int i = 0; i < 2; i++) {
+            if (i > 0)
+                statusCode = HttpStatus.SC_CONFLICT;
+
+            given().accept(ContentType.JSON)
+                    .header("Content-Type", "application/json;charset=UTF-8")
+                    .body(jsonObj.toString())
+                    .expect()
+                    .log()
+                    .all()
+                    .statusCode(statusCode)
+                    .when()
+                    .post(USER_API);
+        }
+    }
+
 }
