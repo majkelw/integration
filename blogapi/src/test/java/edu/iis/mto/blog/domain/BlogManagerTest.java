@@ -48,7 +48,7 @@ class BlogManagerTest {
     }
 
     @Test
-    void test() {
+    void shouldThrowDomainErrorExceptionWhenUserTriedToAddLikeButUserIsNotConfirmed() {
         long dummyLong = 1L;
         blogService.createUser(new UserRequest("John", "Steward", "john@domain.com"));
         verify(userRepository).save(userParam.capture());
