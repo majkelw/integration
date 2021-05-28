@@ -32,6 +32,9 @@ class UserRepositoryTest {
 
     @BeforeEach
     void setUp() {
+        repository.deleteAll();
+        repository.flush();
+
         user = new User();
         user.setFirstName("Jan");
         user.setLastName("Kowalski");

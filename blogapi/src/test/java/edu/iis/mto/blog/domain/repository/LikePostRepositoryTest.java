@@ -37,6 +37,11 @@ class LikePostRepositoryTest {
 
     @BeforeEach
     public void setUp() {
+        likePostRepository.deleteAll();
+        likePostRepository.flush();
+        userRepository.deleteAll();
+        userRepository.flush();
+
         authorPost = new User();
         authorPost.setFirstName("Jan");
         authorPost.setLastName("Kowalski");

@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
 
-public class LikePostTest extends FunctionalTests {
+public class LikePostTests extends FunctionalTests {
 
     private static final String USER_POST_API = "/blog/user/{userId}/post";
     private static final String USER_LIKE_POST_API = "/blog/user/{userId}/like/{postId}";
@@ -18,7 +18,7 @@ public class LikePostTest extends FunctionalTests {
     private static final long ID_POST = 1L;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         JSONObject jsonObj = new JSONObject().put("entry", "entry content");
         given().accept(ContentType.JSON)
                 .header("Content-Type", "application/json;charset=UTF-8")
@@ -33,7 +33,7 @@ public class LikePostTest extends FunctionalTests {
 
 
     @Test
-    void likedPostByUserConfirmedStatusShouldResponseOkStatus() {
+    public void likedPostByUserConfirmedStatusShouldResponseOkStatus() {
         given().accept(ContentType.JSON)
                 .header("Content-Type", "application/json;charset=UTF-8")
                 .expect()
@@ -45,7 +45,7 @@ public class LikePostTest extends FunctionalTests {
     }
 
     @Test
-    void doubleLikedDPostByUserConfirmedStatusShouldStillResponseOkStatus() {
+    public void doubleLikedDPostByUserConfirmedStatusShouldStillResponseOkStatus() {
         for (int i = 0; i < 2; i++) {
             given().accept(ContentType.JSON)
                     .header("Content-Type", "application/json;charset=UTF-8")
@@ -59,7 +59,7 @@ public class LikePostTest extends FunctionalTests {
     }
 
     @Test
-    void likedPostByNotConfirmedUserShouldResponseBadRequestStatus() {
+    public void likedPostByNotConfirmedUserShouldResponseBadRequestStatus() {
         given().accept(ContentType.JSON)
                 .header("Content-Type", "application/json;charset=UTF-8")
                 .expect()
@@ -71,7 +71,7 @@ public class LikePostTest extends FunctionalTests {
     }
 
     @Test
-    void likedPostByConfirmedAuthorShouldResponseBadRequestStatus() {
+    public void likedPostByConfirmedAuthorShouldResponseBadRequestStatus() {
         given().accept(ContentType.JSON)
                 .header("Content-Type", "application/json;charset=UTF-8")
                 .expect()

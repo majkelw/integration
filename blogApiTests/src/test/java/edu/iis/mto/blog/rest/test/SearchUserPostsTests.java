@@ -15,7 +15,7 @@ public class SearchUserPostsTests extends FunctionalTests {
     private static final String USER_POST_API = "/blog/user/{userId}/post";
     private static final String USER_LIKE_POST_API = "/blog/user/{userId}/like/{postId}";
     private static final String SEARCH_USER_POST_API = "/blog/user/{userId}/post";
-    private static final long ID_USER_AUTHOR = 1L;
+    private static final long ID_USER_AUTHOR = 3L;
     private static final long ID_USER_AUTHOR_REMOVED = 4L;
 
     private long createUserPost(long authorId) {
@@ -46,11 +46,11 @@ public class SearchUserPostsTests extends FunctionalTests {
     }
 
     @Test
-    void everySinglePostCreatedByUserShouldBeLikedByTwoOtherUsers() {
+    public void everySinglePostCreatedByUserShouldBeLikedByTwoOtherUsers() {
         for (int i = 0; i < 10; i++) {
-            long id = createUserPost(1L);
+            long id = createUserPost(ID_USER_AUTHOR);
+            createLikePost(1L, id);
             createLikePost(5L, id);
-            createLikePost(3L, id);
         }
 
         Response response = given().accept(ContentType.JSON)
@@ -75,7 +75,7 @@ public class SearchUserPostsTests extends FunctionalTests {
     }
 
     @Test
-    void everySinglePostCreatedByUserShouldNotBeLikedByOtherUsers() {
+    public void everySinglePostCreatedByUserShouldNotBeLikedByOtherUsers() {
         for (int i = 0; i < 10; i++)
             createUserPost(5L);
 
@@ -101,7 +101,7 @@ public class SearchUserPostsTests extends FunctionalTests {
     }
 
     @Test
-    void searchPostsIfAuthorDoesNotExistShouldResponseWithBadRequest() {
+    public void searchPostsIfAuthorDoesNotExistShouldResponseWithBadRequest() {
         long userDoesNotExistId = 1000L;
         given().accept(ContentType.JSON)
                 .header("Content-Type", "application/json;charset=UTF-8")
@@ -115,7 +115,7 @@ public class SearchUserPostsTests extends FunctionalTests {
 
 
     @Test
-    void searchPostsWhenAuthorWasRemovedShouldResponseWithBadRequest() {
+    public void searchPostsWhenAuthorWasRemovedShouldResponseWithBadRequest() {
         given().accept(ContentType.JSON)
                 .header("Content-Type", "application/json;charset=UTF-8")
                 .expect()

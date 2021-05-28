@@ -7,12 +7,12 @@ import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
 
-public class CreatePostTest extends FunctionalTests {
+public class CreatePostTests extends FunctionalTests {
 
     private static final String USER_POST_API = "/blog/user/{userId}/post";
 
     @Test
-    void createPostWithConfirmedStatusShouldResponseWithCreatedStatus() {
+    public void createPostWithConfirmedStatusShouldResponseWithCreatedStatus() {
         long idUserConfirmed = 1L;
 
         JSONObject jsonObj = new JSONObject().put("entry", "entry content");
@@ -28,7 +28,7 @@ public class CreatePostTest extends FunctionalTests {
     }
 
     @Test
-    void createPostWithConfirmedStatusShouldResponseWithBadRequestStatus() {
+    public void createPostWithConfirmedStatusShouldResponseWithBadRequestStatus() {
         long isUserNotConfirmed = 2L;
         JSONObject jsonObj = new JSONObject().put("entry", "entry content");
         given().accept(ContentType.JSON)
