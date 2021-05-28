@@ -2,3 +2,5 @@
 insert into user (account_status, email, first_name, last_name) values ('CONFIRMED', 'john@domain.com', 'John', 'Steward')
 insert into user (account_status, email, first_name) values ('NEW', 'brian@domain.com', 'Brian')
 insert into user (account_status, email, first_name, last_name) values ('CONFIRMED', 'adam@domain.com', 'Adam', 'Smith')
+insert into user (account_status, email, first_name, last_name) values ('REMOVED', 'paul@domain.com', 'Paul', 'Steward')
+insert into user (account_status, email, first_name, last_name) values ('CONFIRMED', 'john.jones@domain.com', 'John', 'Jones')
